@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Convert_Translit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="800" MinWidth="800" MinHeight="400" MaxWidth="800" MaxHeight="400">
+        Title="Latin to Armenian converter" Height="400" Width="800" MinWidth="800" MinHeight="400" MaxWidth="800" MaxHeight="400">
     <Grid>
         <TextBox x:Name="Text_Input" HorizontalAlignment="Left" Height="134" Margin="140,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="594" TextChanged="Text_Input_TextChanged"/>
         <TextBlock x:Name="Text_Converted" HorizontalAlignment="Left" Margin="140,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="144" Width="594"/>
