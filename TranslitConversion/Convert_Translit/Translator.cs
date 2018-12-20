@@ -51,6 +51,7 @@ namespace Convert_Translit
         public static string ConvertText(this string input, string oldText)
         {
             int len = input.Length;
+            if (len == 0) return "";
             string output = (input.Substring(0,len - 1) == previous)?
                 oldText + ConvertFullText(input[len-1].ToString()) :
                 ConvertFullText(input);
