@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FileSystemPrinter
 {
@@ -16,6 +13,7 @@ namespace FileSystemPrinter
             Console.ReadKey();
         }
 
+        // Prints the full names of all of the files and directories in dir and its subdirectories
         private static void PrintContainingFilesAndFolders(string dir)
         {
             DirectoryInfo root = new DirectoryInfo(dir);
@@ -36,6 +34,7 @@ namespace FileSystemPrinter
             }
         }
 
+        // Prints the names of all of the containing files
         private static void PrintFilePaths(DirectoryInfo root)
         {
             IEnumerable<FileInfo> files = new FileInfo[0];
