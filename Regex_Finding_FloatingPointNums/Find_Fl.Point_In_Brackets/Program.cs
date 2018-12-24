@@ -25,7 +25,7 @@ namespace Find_Fl.Point_In_Brackets
 
             foreach(string br in bracks)
             {
-                string pattern = $@"\{br[0]}([0-9]+[.][0-9]+)\{br[1]}";
+                string pattern = $@"\{br[0]}(\d+[.]\d+)\{br[1]}";
                 MatchCollection matches = Regex.Matches(input, pattern);
                 foreach (Match m in matches)
                 {
