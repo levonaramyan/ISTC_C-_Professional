@@ -10,7 +10,7 @@ namespace Find_Fl.Point_In_Brackets
     {
         static void Main(string[] args)
         {
-            string test = "asfvc(2.1) dsgdsg [4.78] {9...4}  (0.15) <0.00>{5.6} ";
+            string test = "asfvc(-2.1) dsgdsg [+4.78] {9...4}  (0.15) <0.00>{5.6} ";
             List<double> res = FindFlPointInBracks(test);
 
             foreach (double a in res) Console.WriteLine(a);
@@ -25,7 +25,7 @@ namespace Find_Fl.Point_In_Brackets
 
             foreach(string br in bracks)
             {
-                string pattern = $@"\{br[0]}(\d+[.]\d+)\{br[1]}";
+                string pattern = $@"\{br[0]}([-+]?\d+[.]\d+)\{br[1]}";
                 MatchCollection matches = Regex.Matches(input, pattern);
                 foreach (Match m in matches)
                 {
