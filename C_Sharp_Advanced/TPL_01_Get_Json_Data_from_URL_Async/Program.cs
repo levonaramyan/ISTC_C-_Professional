@@ -17,6 +17,9 @@ namespace TPL_01_Get_Json_Data_from_URL_Async
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Press any key to start mining data...");
+            Console.ReadKey();
+
             Task getJson = new Task(GetJson);
             getJson.Start();
             Loading(getJson);
