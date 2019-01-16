@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflections_01", "Reflectio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflections_02_Infinity_cycle_with_destructor", "Reflections_02_Infinity_cycle_with_destructor\Reflections_02_Infinity_cycle_with_destructor.csproj", "{67210907-1AE6-4224-9A31-12895484CF9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPL_01_Get_Json_Data_from_URL_Async", "TPL_01_Get_Json_Data_from_URL_Async\TPL_01_Get_Json_Data_from_URL_Async.csproj", "{F6AF9E90-76DF-451E-9F76-52A1C29F54F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{67210907-1AE6-4224-9A31-12895484CF9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67210907-1AE6-4224-9A31-12895484CF9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67210907-1AE6-4224-9A31-12895484CF9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6AF9E90-76DF-451E-9F76-52A1C29F54F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6AF9E90-76DF-451E-9F76-52A1C29F54F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6AF9E90-76DF-451E-9F76-52A1C29F54F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6AF9E90-76DF-451E-9F76-52A1C29F54F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
