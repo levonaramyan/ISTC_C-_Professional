@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflections_02_Infinity_cyc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPL_01_Get_Json_Data_from_URL_Async", "TPL_01_Get_Json_Data_from_URL_Async\TPL_01_Get_Json_Data_from_URL_Async.csproj", "{F6AF9E90-76DF-451E-9F76-52A1C29F54F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Async_Await_Get_Github_Profile_Info", "Async_Await_Get_Github_Profile_Info\Async_Await_Get_Github_Profile_Info.csproj", "{376F2A80-4D76-48A2-8FBB-F5205F4E44D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F6AF9E90-76DF-451E-9F76-52A1C29F54F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6AF9E90-76DF-451E-9F76-52A1C29F54F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6AF9E90-76DF-451E-9F76-52A1C29F54F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{376F2A80-4D76-48A2-8FBB-F5205F4E44D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{376F2A80-4D76-48A2-8FBB-F5205F4E44D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{376F2A80-4D76-48A2-8FBB-F5205F4E44D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{376F2A80-4D76-48A2-8FBB-F5205F4E44D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
