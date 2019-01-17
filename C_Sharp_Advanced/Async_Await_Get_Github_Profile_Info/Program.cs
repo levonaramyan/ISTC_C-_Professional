@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -42,7 +43,7 @@ namespace Async_Await_Get_Github_Profile_Info
             {
                 using (var sr = new StreamReader(s))
                 {
-                    var contributorsAsJson = sr.ReadToEnd();
+                    var contributorsAsJson = await sr.ReadToEndAsync();
                     return contributorsAsJson;
                 }
             }
@@ -65,11 +66,22 @@ namespace Async_Await_Get_Github_Profile_Info
         static async Task PrintProfileInfo(GithubProfile user)
         {
             Console.WriteLine($"Username: {user.login}");
+            //Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+
             Console.WriteLine($"Name: {user.name}");
+            //Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+
             Console.WriteLine($"Number of repositories: {user.public_repos}");
+            //Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+
             Console.WriteLine($"The number of followers: {user.followers}");
+            //Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+
             Console.WriteLine($"Follows: {user.following}");
+            //Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+
             Console.WriteLine($"Created account at: {user.created_at}");
+            //Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
         }
     }
 }
