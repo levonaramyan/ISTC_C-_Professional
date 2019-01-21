@@ -23,7 +23,7 @@ namespace Async_Await_Get_Github_Profile_Info
                 string url = @"https://api.github.com/users/" + await ReadUsernameFromConsoleAsync();
                 string userJson = await GetDataFromURLAsync(url);
                 GithubProfile user = await GetGithubProfileFromJsonAsync(userJson);
-                await PrintProfileInfo(user);
+                await PrintProfileInfoAsync(user);
                 return true;
             }
             catch
@@ -49,13 +49,19 @@ namespace Async_Await_Get_Github_Profile_Info
             }
         }
 
-        static async Task<GithubProfile> GetGithubProfileFromJsonAsync(string jsonString)
+        static GithubProfile GetGithubProfileFromJson(object jsonObj)
         {
+            string jsonString = (string)jsonObj;
             GithubProfile user = JsonConvert.DeserializeObject<GithubProfile>(jsonString);
             return user;
         }
 
-        static async Task<string> ReadUsernameFromConsoleAsync()
+        static async Task<GithubProfile> GetGithubProfileFromJsonAsync(string jsonString)
+        {
+            return await Task<GithubProfile>.Factory.StartNew(GetGithubProfileFromJson, jsonString);
+        }
+
+        static string ReadUsernameFromConsole()
         {
             Console.Write("Please type the Github username: ");
             string username = Console.ReadLine();
@@ -63,8 +69,14 @@ namespace Async_Await_Get_Github_Profile_Info
             return username;
         }
 
-        static async Task PrintProfileInfo(GithubProfile user)
+        static async Task<string> ReadUsernameFromConsoleAsync()
         {
+            return await Task<string>.Factory.StartNew(ReadUsernameFromConsole);
+        }
+
+        static void TryPrintProfileInfo(object userObj)
+        {
+            GithubProfile user = (GithubProfile)userObj;
             Console.WriteLine($"Username: {user.login}");
             //Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
 
@@ -82,6 +94,11 @@ namespace Async_Await_Get_Github_Profile_Info
 
             Console.WriteLine($"Created account at: {user.created_at}");
             //Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+        }
+
+        static async Task PrintProfileInfoAsync(GithubProfile user)
+        {
+            await Task.Factory.StartNew(TryPrintProfileInfo, user);
         }
     }
 }
