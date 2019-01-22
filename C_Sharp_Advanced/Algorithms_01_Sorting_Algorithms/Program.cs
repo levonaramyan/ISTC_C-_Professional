@@ -10,13 +10,14 @@ namespace Algorithms_01_Sorting_Algorithms
     {
         static void Main(string[] args)
         {
-            int[] data = new int[] { 110, 15, 47, 25, 10, 6, 47, 18 };
+            int[] data = new int[] { 3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48};
             foreach (int a in data) Console.Write($"{a} ");
             Console.WriteLine();
             //SortBubble(data);
             //SortSelection(data);
             //SortInsertion(data);
-            SortMerge(data);
+            //SortMerge(data);
+            SortQuick(data);
             foreach (int a in data) Console.Write($"{a} ");
             Console.ReadKey();
         }
@@ -91,6 +92,28 @@ namespace Algorithms_01_Sorting_Algorithms
             }
 
             return data;
+        }
+
+        static void SortQuick(int[] data)
+        {
+            int len = data.Length;
+            int[] endPoint = new int[len];
+            for (int i = 0; i < len - 1; i++)
+            {
+                if (endPoint[i] == 1) continue;
+                int storeIndex = i + 1;
+                for (int j = i + 1; j < len && endPoint[j] == 0; j++)
+                {
+                    if (data[j] < data[i])
+                    {
+                        Swap(ref data[storeIndex], ref data[j]);
+                        storeIndex++;
+                    }
+                }
+                Swap(ref data[storeIndex - 1], ref data[i]);
+                endPoint[storeIndex - 1] = 1;
+                if (i != storeIndex - 1) i--;
+            }
         }
 
         static void Swap(ref int a, ref int b)
