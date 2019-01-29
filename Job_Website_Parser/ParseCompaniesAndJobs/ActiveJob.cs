@@ -9,6 +9,7 @@ namespace ParseCompaniesAndJobs
     class ActiveJob
     {
         public string Title { get; set; }
+        public string Url { get; set; }
         public CompanyInfo JobCompany {get; set; }
         public string EmploymentTerm { get; set; }
         public string JobType { get; set; }
@@ -18,5 +19,21 @@ namespace ParseCompaniesAndJobs
         public string JobResponsibilities { get; set; }
         public string RequiredQualifications { get; set; }
         public string AdditionalInformation { get; set; }
+
+        public ActiveJob()
+        {
+            
+        }
+
+        public ActiveJob(string url, CompanyInfo company)
+        {
+            JobCompany = company;
+            ParseJobInfo(url);
+        }
+
+        protected void ParseJobInfo(string url)
+        {
+            
+        }
     }
 }
