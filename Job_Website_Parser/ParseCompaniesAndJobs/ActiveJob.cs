@@ -35,5 +35,19 @@ namespace ParseCompaniesAndJobs
         {
             
         }
+
+        public void PrintJobInfo()
+        {
+            Console.WriteLine($"Title: {Title}\n");
+            Console.WriteLine($"URL: {Url}\n");
+            Console.WriteLine($"Employment Term: {EmploymentTerm}\n");
+            Console.WriteLine($"Job Type: {JobType}\n");
+            Console.WriteLine($"Category: {Category}\n");
+            Console.WriteLine($"Location: {Location}\n");
+            Console.WriteLine($"Job Description: {JobDescription}\n");
+            Console.WriteLine($"Job Responsibilities: {JobResponsibilities}\n");
+            Console.WriteLine($"Required Qualifications: {RequiredQualifications}\n");
+            Console.WriteLine($"Additional Information: {AdditionalInformation}\n");
+        }
     }
 }

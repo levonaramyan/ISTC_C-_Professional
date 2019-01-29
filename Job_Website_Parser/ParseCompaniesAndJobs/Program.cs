@@ -21,11 +21,10 @@ namespace ParseCompaniesAndJobs
             //Console.WriteLine(Parser.GetContentCollectionFromURL(testUrl,"//*[@class=\"company-job-history\"]/span").InnerText);
 
             ActiveJob job = Parser.GetJobInfo(testJub);
+            job.PrintJobInfo();
 
-            Console.WriteLine(job.EmploymentTerm);
-            Console.WriteLine(job.Location);
-            Console.WriteLine(job.JobType);
-            Console.WriteLine(job.Category);
+            Company company = Parser.GetCompanyInfo(testUrl);
+            company.PrintCompanyInfo();
             Console.ReadKey();
         }
     }

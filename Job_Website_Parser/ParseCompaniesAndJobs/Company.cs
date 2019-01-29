@@ -26,5 +26,16 @@ namespace ParseCompaniesAndJobs
         {
             ActiveJobs = new List<ActiveJob>(0);
         }
+
+        public void PrintCompanyInfo()
+        {
+            Console.WriteLine($"Name: {Name}\n");
+            Console.WriteLine($"Industry: {Industry}\n");
+            Console.WriteLine($"Type: {Type}\n");
+            Console.WriteLine($"Number of employees: {NumberOfEmployees}\n");
+            Console.WriteLine($"Date of Foundation: {DateOfFoundation}\n");
+            Console.WriteLine($"Active Jobs: {JobsCount}\n");
+            Console.WriteLine($"Jobs History: {JobsHistory}\n");
+        }
     }
 }
