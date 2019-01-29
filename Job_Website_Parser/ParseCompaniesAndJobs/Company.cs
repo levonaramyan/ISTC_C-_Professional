@@ -12,14 +12,19 @@ namespace ParseCompaniesAndJobs
         public string About { get; set; }
         public string Industry { get; set; }
         public string Type { get; set; }
-        public string NumberOfEmployees { get; set; }
+        public int NumberOfEmployees { get; set; }
         public int DateOfFoundation { get; set; }
     }
 
     class Company: CompanyInfo
     {
         public List<ActiveJob> ActiveJobs { get; set; }
-        public int JobsCount { get; set; }
+        public int JobsCount { get => ActiveJobs.Count; }
         public int JobsHistory { get; set; }
+
+        public Company()
+        {
+            ActiveJobs = new List<ActiveJob>(0);
+        }
     }
 }

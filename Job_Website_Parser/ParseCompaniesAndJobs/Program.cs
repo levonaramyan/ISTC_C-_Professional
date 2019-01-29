@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 
@@ -11,16 +12,20 @@ namespace ParseCompaniesAndJobs
     {
         static void Main(string[] args)
         {
-            string testUrl = "https://staff.am/en/sales-and-service-specialist-5";
-            //string xpath = "/html/body/div[2]/div[3]/div/div[4]";
-            //string xpath = "//*[@class=\"additional-information information_application_block\"]/p";
-            //HtmlNodeCollection nodesInfo = Parser.GetContentCollection(testUrl,xpath);
-            //foreach (var a in nodesInfo) Console.WriteLine(a.InnerText);
+            string testUrl = "https://staff.am/en/company/synopsys-armenia";
+            string testJub = "https://staff.am/en/senior-quality-engineer";
+            //Company company = Parser.GetCompanyInfo(testUrl);
+            //Console.WriteLine(company.Industry);
+            //Console.WriteLine(company.DateOfFoundation);
+            //Console.WriteLine(company.Type);
+            //Console.WriteLine(Parser.GetContentCollectionFromURL(testUrl,"//*[@class=\"company-job-history\"]/span").InnerText);
 
-            ActiveJob job1 = Parser.GetJobInfo(testUrl);
+            ActiveJob job = Parser.GetJobInfo(testJub);
 
-            Console.WriteLine(job1.Title);
-            Console.WriteLine(job1.RequiredQualifications);
+            Console.WriteLine(job.EmploymentTerm);
+            Console.WriteLine(job.Location);
+            Console.WriteLine(job.JobType);
+            Console.WriteLine(job.Category);
             Console.ReadKey();
         }
     }
