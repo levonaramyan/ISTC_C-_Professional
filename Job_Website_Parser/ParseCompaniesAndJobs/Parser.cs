@@ -137,5 +137,34 @@ namespace ParseCompaniesAndJobs
 
             return company;
         }
+
+        public static List<string> GetJobsURLs(string url)
+        {
+            List<string> jobURLs = new List<string>(0);
+            string html = GetHTMLCode(url);
+            HtmlDocument code = new HtmlDocument();
+            code.LoadHtml(html);
+            string xPath = "//*[@class=\"col-sm-6 pl5\"]/a";
+            string urlLeft = url.Substring(0, url.IndexOf("/en/company"));
+
+            HtmlNodeCollection urlNodes = code.DocumentNode.SelectNodes(xPath);
+            foreach (HtmlNode jobNode in urlNodes)
+            {
+                jobURLs.Add(urlLeft + jobNode.GetAttributeValue("href", ""));
+            }
+
+            return jobURLs;
+        }
+
+        public static Company GetCompanyWithJobs(string url)
+        {
+            Company company = GetCompanyInfo(url);
+            List<string> jobUrls = GetJobsURLs(url);
+
+            foreach (string jobLink in jobUrls)
+                company.ActiveJobs.Add(GetJobInfo(jobLink));
+
+            return company;
+        }
     }
 }

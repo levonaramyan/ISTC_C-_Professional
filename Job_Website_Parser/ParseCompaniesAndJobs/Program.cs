@@ -12,19 +12,13 @@ namespace ParseCompaniesAndJobs
     {
         static void Main(string[] args)
         {
-            string testUrl = "https://staff.am/en/company/synopsys-armenia";
+            string testUrl = "https://staff.am/en/company/betconstruct";
             string testJub = "https://staff.am/en/senior-quality-engineer";
-            //Company company = Parser.GetCompanyInfo(testUrl);
-            //Console.WriteLine(company.Industry);
-            //Console.WriteLine(company.DateOfFoundation);
-            //Console.WriteLine(company.Type);
-            //Console.WriteLine(Parser.GetContentCollectionFromURL(testUrl,"//*[@class=\"company-job-history\"]/span").InnerText);
 
-            ActiveJob job = Parser.GetJobInfo(testJub);
-            job.PrintJobInfo();
+            Company betconstruct = Parser.GetCompanyWithJobs(testUrl);
+            betconstruct.PrintCompanyInfo();
 
-            Company company = Parser.GetCompanyInfo(testUrl);
-            company.PrintCompanyInfo();
+            foreach (ActiveJob job in betconstruct.ActiveJobs) Console.WriteLine(job.Title);
             Console.ReadKey();
         }
     }
