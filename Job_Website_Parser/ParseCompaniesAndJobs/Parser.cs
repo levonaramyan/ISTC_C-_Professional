@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System.Threading;
 
 namespace ParseCompaniesAndJobs
 {
@@ -25,7 +25,7 @@ namespace ParseCompaniesAndJobs
             return result;
         }
 
-        public static HtmlNode GetContentFromURL(string url, string xPath)
+        private static HtmlNode GetContentFromURL(string url, string xPath)
         {
             HtmlDocument code = new HtmlDocument();
             code.LoadHtml(GetHTMLCode(url));
@@ -138,7 +138,7 @@ namespace ParseCompaniesAndJobs
             return company;
         }
 
-        public static List<string> GetJobsURLs(string url)
+        private static List<string> GetJobsURLs(string url)
         {
             List<string> jobURLs = new List<string>(0);
             string html = GetHTMLCode(url);
@@ -147,11 +147,13 @@ namespace ParseCompaniesAndJobs
             string xPath = "//*[@class=\"col-sm-6 pl5\"]/a";
             string urlLeft = url.Substring(0, url.IndexOf("/en/company"));
 
-            HtmlNodeCollection urlNodes = code.DocumentNode.SelectNodes(xPath);
-            foreach (HtmlNode jobNode in urlNodes)
+            try
             {
-                jobURLs.Add(urlLeft + jobNode.GetAttributeValue("href", ""));
+                HtmlNodeCollection urlNodes = code.DocumentNode.SelectNodes(xPath);
+                foreach (HtmlNode jobNode in urlNodes)
+                    jobURLs.Add(urlLeft + jobNode.GetAttributeValue("href", ""));
             }
+            catch { }
 
             return jobURLs;
         }
@@ -165,6 +167,59 @@ namespace ParseCompaniesAndJobs
                 company.ActiveJobs.Add(GetJobInfo(jobLink));
 
             return company;
+        }
+
+        private static string Scroll(string url)
+        {
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.AddArgument("--disable-images");
+            ChromeDriver chromeDriver = new ChromeDriver(chromeOptions);
+            chromeDriver.Navigate().GoToUrl(url);
+            long scrollHeight = 0;
+            do
+            {
+                IJavaScriptExecutor js = chromeDriver;
+                var newScrollHeight = (long)js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight); return document.body.scrollHeight;");
+
+                if (newScrollHeight == scrollHeight) break;
+                else
+                {
+                    scrollHeight = newScrollHeight;
+                    Thread.Sleep(2000);
+                }
+            } while (true);
+
+            string pageSource = chromeDriver.PageSource;
+
+            chromeDriver.Close();
+
+            return pageSource;
+        }
+
+        private static List<string> GetAllCompanyURLs(string url)
+        {
+            List<string> companyURLs = new List<string>(0);
+            string html = Scroll(url);
+            HtmlDocument code = new HtmlDocument();
+            code.LoadHtml(html);
+            string xPath = "//*[@class=\"company-action company_inner_right\"]/a";
+            string urlLeft = url.Substring(0, url.IndexOf("/en/companies"));
+
+            HtmlNodeCollection urlNodes = code.DocumentNode.SelectNodes(xPath);
+            foreach (HtmlNode companyNode in urlNodes)
+                companyURLs.Add(urlLeft + companyNode.GetAttributeValue("href", ""));
+
+            return companyURLs;
+        }
+
+        public static List<Company> GetAllCompaniesWithTheirJobs(string url)
+        {
+            List<Company> companies = new List<Company>(0);
+            List<string> compURLs = GetAllCompanyURLs(url);
+            foreach (string companyURL in compURLs)
+                companies.Add(GetCompanyWithJobs(companyURL));
+
+            return companies;
         }
     }
 }
