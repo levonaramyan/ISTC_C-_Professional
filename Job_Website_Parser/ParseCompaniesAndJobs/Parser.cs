@@ -7,11 +7,14 @@ using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace ParseCompaniesAndJobs
 {
     static class Parser
     {
+        public static string LoadingStatus = "Is Completed";
+
         private static string GetHTMLCode(string Url)
         {
             HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create(Url);
@@ -47,7 +50,8 @@ namespace ParseCompaniesAndJobs
         }
 
         public static ActiveJob GetJobInfo(string url)
-        {            
+        {
+            ActiveJob job = new ActiveJob();
             string pathTitle = "//*[@class=\"col-lg-8\"]/h2";
             string pathEmploymentTerm = "//*[@class=\"col-lg-6 job-info\"][1]/p[1]";
             string regexTerms = @"[^:]*:\s+(.*)";
@@ -58,7 +62,7 @@ namespace ParseCompaniesAndJobs
             string pathJobResponsibilities = "//*[@class=\"job-list-content-desc\"]//ul[1]";
             string pathRequiredQualifications = "//*[@class=\"job-list-content-desc\"]//ul[2]";
             string pathAdditionalInformation = "//*[@class=\"additional-information information_application_block\"]/p[1]";
-            ActiveJob job = new ActiveJob();
+            
             job.Url = url;
 
             try
@@ -219,7 +223,19 @@ namespace ParseCompaniesAndJobs
             foreach (string companyURL in compURLs)
                 companies.Add(GetCompanyWithJobs(companyURL));
 
+            LoadingStatus = "Is completed!!!";
+
             return companies;
+        }
+
+        public static async Task<List<Company>> GetAllCompaniesWithTheirJobsAsync(string url)
+        {
+            return await Task.Run(() => GetAllCompaniesWithTheirJobs(url));
+        }
+
+        public static void Loading()
+        {
+
         }
     }
 }

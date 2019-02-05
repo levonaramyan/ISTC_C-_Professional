@@ -16,7 +16,8 @@ namespace ParseCompaniesAndJobs
             string testJub = "https://staff.am/en/senior-quality-engineer";
             string sep = new string('*', 75);
 
-            List<Company> companies = Parser.GetAllCompaniesWithTheirJobs(testUrl);
+            List<Company> companies = Parser.GetAllCompaniesWithTheirJobsAsync(testUrl).Result;
+
             foreach (Company company in companies)
             {
                 Console.WriteLine(sep);
